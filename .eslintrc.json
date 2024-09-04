@@ -1,3 +1,34 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:import/recommended",
+    "prettier"
+  ],
+  "plugins": ["react", "import"],
+  "rules": {
+    "import/no-unresolved": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", ["parent", "sibling"]],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
+      }
+    ],
+    "react/jsx-pascal-case": ["error", { "allowAllCaps": true, "ignore": [] }]
+  },
+  "overrides": [
+    {
+      "files": ["./src/modules/**/*.js", "./src/modules/**/*.jsx"],
+      "rules": {
+        "react/prop-types": "error"
+      }
+    }
+  ]
 }
