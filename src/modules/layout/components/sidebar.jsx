@@ -14,7 +14,7 @@ export default function Sidebar({ children }) {
 
   return (
     <aside className="h-screen">
-      <nav className="flex h-full flex-col border-r bg-white shadow-sm">
+      <nav className="flex h-full flex-col border-r-2 border-black bg-white shadow-sm">
         <div className="flex items-center justify-between p-4 pb-2">
           <img
             src="https://img.logoipsum.com/243.svg"
