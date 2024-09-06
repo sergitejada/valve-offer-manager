@@ -10,7 +10,6 @@ export const metadata = {
 }
 
 export default function AootLayout({ children }) {
-  const a = 'a'
   return (
     <html lang="en">
       <body className={inter.className}>

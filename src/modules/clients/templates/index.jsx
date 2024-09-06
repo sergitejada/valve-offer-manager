@@ -1,66 +1,34 @@
-import Button from '@modules/commons/components/button'
+import DataTable from '@modules/clients/components/data-table'
 import Text from '@modules/commons/components/text'
 import ClientsIcon from '@modules/commons/icons/clients-icon'
+import PlusIcon from '@modules/commons/icons/plus-icon'
+import { Button } from '@modules/commons/ui/button'
+import { Card } from '@modules/commons/ui/card'
 
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/modules/commons/ui/table'
-
-const invoices = [
+const clients = [
   {
-    invoice: 'INV001',
+    name: 'ACME Inc.',
+    contact: [
+      {
+        name: 'John Doe',
+        email: 'john@acme.com',
+        phone: '123456789',
+      },
+      {
+        name: 'Jane Doe',
+        email: 'jane@acme.com',
+        phone: '987654321',
+      },
+    ],
     paymentStatus: 'Paid',
     totalAmount: '$250.00',
-    paymentMethod: 'Credit Card',
-  },
-  {
-    invoice: 'INV002',
-    paymentStatus: 'Pending',
-    totalAmount: '$150.00',
-    paymentMethod: 'PayPal',
-  },
-  {
-    invoice: 'INV003',
-    paymentStatus: 'Unpaid',
-    totalAmount: '$350.00',
-    paymentMethod: 'Bank Transfer',
-  },
-  {
-    invoice: 'INV004',
-    paymentStatus: 'Paid',
-    totalAmount: '$450.00',
-    paymentMethod: 'Credit Card',
-  },
-  {
-    invoice: 'INV005',
-    paymentStatus: 'Paid',
-    totalAmount: '$550.00',
-    paymentMethod: 'PayPal',
-  },
-  {
-    invoice: 'INV006',
-    paymentStatus: 'Pending',
-    totalAmount: '$200.00',
-    paymentMethod: 'Bank Transfer',
-  },
-  {
-    invoice: 'INV007',
-    paymentStatus: 'Unpaid',
-    totalAmount: '$300.00',
     paymentMethod: 'Credit Card',
   },
 ]
 
 export default function ClientLayoutIndex() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <div className="rounded-full border border-black bg-white p-3">
@@ -68,41 +36,20 @@ export default function ClientLayoutIndex() {
           </div>
           <div className="flex flex-col">
             <Text as="h1">Clients</Text>
-            <Text>Here is the list of our clients:</Text>
+            <Text className="text-gray-500">Here is the list of our clients</Text>
           </div>
         </div>
-        <Button>Add new client</Button>
+        <Button>
+          <div className="mr-2 h-4 w-4">
+            <PlusIcon />
+          </div>
+          Create
+        </Button>
       </div>
 
-      <div className="w-full bg-white">
-        <Table>
-          <TableCaption>A list of your recent invoices.</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">Invoice</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Method</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {invoices.map((invoice) => (
-              <TableRow key={invoice.invoice}>
-                <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                <TableCell>{invoice.paymentStatus}</TableCell>
-                <TableCell>{invoice.paymentMethod}</TableCell>
-                <TableCell className="text-right">{invoice.totalAmount}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={3}>Total</TableCell>
-              <TableCell className="text-right">$2,500.00</TableCell>
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </div>
+      <Card className="p-5">
+        <DataTable data={clients} />
+      </Card>
     </div>
   )
 }

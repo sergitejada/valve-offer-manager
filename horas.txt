@@ -1,2 +1,3 @@
 02/09/24 -> 3.5h Eslint config + Sidebar style
 04/09/24 -> 2.5h Sidebar + instalar shadcn + table component
+05/09/24 -> 1.h Button - Table + index Client

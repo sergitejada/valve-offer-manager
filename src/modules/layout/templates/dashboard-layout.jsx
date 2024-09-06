@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }) {
           <SidebarItem icon={<OffersIcon />} text="Offers" href="/offers" />
         </Sidebar>
       </div>
-      <div className="w-full bg-gray-100 p-8">{children}</div>
+      <div className="w-full bg-gray-100 px-16 py-8">{children}</div>
     </div>
   )
 }
