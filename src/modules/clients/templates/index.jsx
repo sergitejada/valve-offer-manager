@@ -6,6 +6,7 @@ import { Plus, Users } from 'lucide-react'
 
 const clients = [
   {
+    id: 1,
     name: 'ACME Inc.',
     contact: [
       {
@@ -24,6 +25,7 @@ const clients = [
     last_order: '#123467',
   },
   {
+    id: 2,
     name: 'TechCorp',
     contact: [
       {
@@ -37,6 +39,7 @@ const clients = [
     last_order: '#789012',
   },
   {
+    id: 3,
     name: 'Global Solutions',
     contact: [
       {
@@ -55,6 +58,7 @@ const clients = [
     last_order: '#345678',
   },
   {
+    id: 4,
     name: 'Innovate Co.',
     contact: [
       {
@@ -68,6 +72,7 @@ const clients = [
     last_order: '#901234',
   },
   {
+    id: 5,
     name: 'EcoFriendly Ltd.',
     contact: [
       {
@@ -81,6 +86,7 @@ const clients = [
     last_order: '#567890',
   },
   {
+    id: 6,
     name: 'MegaCorp',
     contact: [
       {
@@ -99,6 +105,7 @@ const clients = [
     last_order: '#123789',
   },
   {
+    id: 7,
     name: 'SmartSystems',
     contact: [
       {
@@ -112,6 +119,7 @@ const clients = [
     last_order: '#456123',
   },
   {
+    id: 8,
     name: 'FutureTech',
     contact: [
       {
@@ -125,6 +133,7 @@ const clients = [
     last_order: '#789456',
   },
   {
+    id: 9,
     name: 'GreenEnergy',
     contact: [
       {
@@ -143,6 +152,7 @@ const clients = [
     last_order: '#234567',
   },
   {
+    id: 10,
     name: 'DataDynamics',
     contact: [
       {
@@ -156,6 +166,7 @@ const clients = [
     last_order: '#890123',
   },
   {
+    id: 11,
     name: 'CloudNine',
     contact: [
       {
@@ -169,6 +180,7 @@ const clients = [
     last_order: '#567234',
   },
   {
+    id: 12,
     name: 'Quantum Ltd.',
     contact: [
       {
@@ -187,6 +199,7 @@ const clients = [
     last_order: '#901456',
   },
   {
+    id: 13,
     name: 'AI Solutions',
     contact: [
       {
@@ -200,6 +213,7 @@ const clients = [
     last_order: '#345901',
   },
   {
+    id: 14,
     name: 'RoboTech',
     contact: [
       {
@@ -213,6 +227,7 @@ const clients = [
     last_order: '#678345',
   },
   {
+    id: 15,
     name: 'SecureNet',
     contact: [
       {
@@ -231,6 +246,7 @@ const clients = [
     last_order: '#234890',
   },
   {
+    id: 16,
     name: 'BioTech Inc.',
     contact: [
       {
@@ -244,6 +260,7 @@ const clients = [
     last_order: '#567012',
   },
   {
+    id: 17,
     name: 'VR Dynamics',
     contact: [
       {
@@ -257,6 +274,7 @@ const clients = [
     last_order: '#890567',
   },
   {
+    id: 18,
     name: 'WebWizards',
     contact: [
       {
@@ -275,6 +293,7 @@ const clients = [
     last_order: '#123678',
   },
   {
+    id: 19,
     name: 'Nano Systems',
     contact: [
       {
@@ -288,6 +307,7 @@ const clients = [
     last_order: '#456901',
   },
   {
+    id: 20,
     name: 'EcoSmart',
     contact: [
       {
