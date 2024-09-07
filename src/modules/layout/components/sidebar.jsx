@@ -1,7 +1,8 @@
 'use client'
 
-import ChevronLeft from '@modules/commons/icons/chevron-left'
-import ChevronRight from '@modules/commons/icons/chevron-right'
+import { ArrowLeftToLine, ArrowRightFromLine } from 'lucide-react'
+// import ChevronLeft from '@modules/commons/icons/chevron-left'
+// import ChevronRight from '@modules/commons/icons/chevron-right'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import PropTypes from 'prop-types'
@@ -25,7 +26,7 @@ export default function Sidebar({ children }) {
             onClick={() => setExpanded((curr) => !curr)}
             className="rounded-lg bg-gray-50 p-1.5 hover:bg-gray-100"
           >
-            {expanded ? <ChevronRight /> : <ChevronLeft />}
+            {expanded ? <ArrowLeftToLine /> : <ArrowRightFromLine />}
           </button>
         </div>
 
@@ -66,8 +67,8 @@ export function SidebarItem({ icon, text, alert, href }) {
     <li>
       <Link
         href={href}
-        className={`group relative my-1 flex cursor-pointer items-center rounded-md px-3 py-2 font-medium transition-colors ${
-          active ? 'bg-gradient-to-tr from-amber-200 to-amber-100 text-amber-800' : 'text-gray-600 hover:bg-amber-50'
+        className={`group relative my-1 flex cursor-pointer items-center rounded-md px-3 py-2 font-semibold transition-colors ${
+          active ? 'bg-gradient-to-tr from-amber-200 to-amber-100 text-amber-800' : 'hover:bg-amber-50'
         } `}
       >
         {icon}
