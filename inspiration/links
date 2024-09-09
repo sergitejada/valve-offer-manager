@@ -1,1 +1,16 @@
+Links ->
+
 https://dribbble.com/shots/24640863-Claim-Details-Submit-for-Payment-Endurance-Warranty
+https://dribbble.com/shots/22946380-KirriDesk-Ticket-List-for-SaaS-Customer-Service-Management
+https://dribbble.com/shots/24507079-Fulfil-io
+
+Code ->
+
+{/\* <div>
+<Label className="text-sm font-medium text-gray-600">Receipts</Label>
+
+  <div className="mt-1 rounded-md border-2 border-dashed p-4 text-center">
+    <p className="text-sm text-gray-700">Click to select or drop files.</p>
+    <p className="text-xs text-gray-500">We accept PDF, JPG and PNG files up to 10MB.</p>
+  </div>
+</div> */}
