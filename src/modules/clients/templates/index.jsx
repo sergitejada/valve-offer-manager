@@ -1,5 +1,6 @@
 import DataTable from '@modules/clients/components/data-table'
 import Text from '@modules/commons/components/text'
+import { Avatar, AvatarFallback, AvatarImage } from '@modules/commons/ui/avatar'
 import { Button } from '@modules/commons/ui/button'
 import { Card } from '@modules/commons/ui/card'
 import { Plus, Users } from 'lucide-react'
@@ -327,9 +328,12 @@ export default function ClientLayoutIndex() {
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="rounded-full border border-black bg-white p-3">
-            <Users />
-          </div>
+          <Avatar>
+            {/* <AvatarImage src="https://github.com/ekmas.png" /> */}
+            <AvatarFallback>
+              <Users />
+            </AvatarFallback>
+          </Avatar>
           <div className="flex flex-col">
             <Text as="h1">Clients</Text>
             <Text className="text-gray-500">Here is the list of our clients</Text>
