@@ -1,6 +1,9 @@
 'use client'
 
-import { ArrowLeftToLine, ArrowRightFromLine } from 'lucide-react'
+import Separator from '@modules/commons/components/separator'
+import { Button } from '@modules/commons/ui/button'
+import { ArrowLeftToLine, ArrowRightFromLine, Search } from 'lucide-react'
+import Image from 'next/image'
 // import ChevronLeft from '@modules/commons/icons/chevron-left'
 // import ChevronRight from '@modules/commons/icons/chevron-right'
 import Link from 'next/link'
@@ -14,38 +17,61 @@ export default function Sidebar({ children }) {
   const [expanded, setExpanded] = useState(true)
 
   return (
-    <aside className="h-screen">
-      <nav className="flex h-full flex-col border-r-2 border-black bg-white shadow-sm">
-        <div className="flex items-center justify-between p-4 pb-2">
-          <img
-            src="https://img.logoipsum.com/243.svg"
+    <aside className="h-screen min-w-[50px]">
+      <nav
+        className={`flex h-full flex-col border-black bg-neutral-950 shadow-sm transition-all ${expanded ? 'w-64' : 'w-[56px]'}`}
+      >
+        <div className={`flex h-[50px] items-center ${expanded ? 'justify-between' : 'justify-center'}`}>
+          <Image
+            src="https://img.logoipsum.com/288.svg"
             className={`overflow-hidden transition-all ${expanded ? 'w-32' : 'w-0'}`}
             alt=""
+            width={128}
+            height={32}
           />
-          <button
-            onClick={() => setExpanded((curr) => !curr)}
-            className="rounded-lg bg-gray-50 p-1.5 hover:bg-gray-100"
-          >
-            {expanded ? <ArrowLeftToLine /> : <ArrowRightFromLine />}
-          </button>
+
+          <div className="flex items-center">
+            <Button
+              variant="ghost"
+              disabled
+              type="button"
+              className={`group rounded-lg p-1.5 transition-opacity duration-700 ${expanded ? 'opacity-100' : 'hidden'}`}
+            >
+              <Search className="h-5 w-5 text-neutral-500 group-hover:text-neutral-400" />
+            </Button>
+
+            <Button
+              variant="ghost"
+              onClick={() => setExpanded((curr) => !curr)}
+              className="group rounded-lg p-1.5 hover:bg-current"
+            >
+              {expanded ? (
+                <ArrowLeftToLine className="h-5 w-5 text-neutral-500 group-hover:text-neutral-400" />
+              ) : (
+                <ArrowRightFromLine className="h-5 w-5 text-neutral-500" />
+              )}
+            </Button>
+          </div>
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
-          <ul className="flex-1 px-3">{children}</ul>
+          <div className="flex flex-1 flex-col gap-1 px-2">{children}</div>
         </SidebarContext.Provider>
 
-        <div className="flex border-t p-3">
-          <img
-            src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
-            alt=""
-            className="h-10 w-10 rounded-md"
-          />
-          <div
-            className={`flex items-center justify-between overflow-hidden transition-all ${expanded ? 'ml-3 w-52' : 'w-0'} `}
-          >
-            <div className="leading-4">
-              <h4 className="font-semibold">John Doe</h4>
-              <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+        <div className="flex flex-col items-center p-3">
+          <div className="mt-4 flex items-center">
+            <Image
+              src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
+              alt=""
+              className="h-8 w-8 rounded-full"
+              width={32}
+              height={32}
+            />
+            <div className={`ml-3 overflow-hidden ${expanded ? 'w-40' : 'w-0'}`}>
+              <div className="leading-4">
+                <h4 className="font-semibold text-neutral-300">John Doe</h4>
+                <span className="text-xs text-neutral-500">johndoe@gmail.com</span>
+              </div>
             </div>
           </div>
         </div>
@@ -64,26 +90,24 @@ export function SidebarItem({ icon, text, alert, href }) {
   const active = pathname === href
 
   return (
-    <li>
-      <Link
-        href={href}
-        className={`group relative my-1 flex cursor-pointer items-center rounded-md px-3 py-2 font-semibold transition-colors ${
-          active ? 'bg-gradient-to-tr from-amber-200 to-amber-100 text-amber-800' : 'hover:bg-amber-50'
-        } `}
-      >
-        {icon}
-        <span className={`overflow-hidden transition-all ${expanded ? 'ml-3 w-52' : 'w-0'}`}>{text}</span>
-        {alert && <div className={`absolute right-2 h-2 w-2 rounded bg-indigo-400 ${expanded ? '' : 'top-2'}`} />}
+    <Link
+      href={href}
+      className={`group inline-flex h-9 cursor-pointer items-center justify-center rounded-md font-semibold text-neutral-50 transition-colors ${
+        active ? 'bg-neutral-800' : 'hover:bg-neutral-800'
+      } ${expanded ? 'w-full' : 'w-9'}`}
+    >
+      {icon}
+      <span className={`overflow-hidden text-sm font-medium ${expanded ? 'ml-3 w-52' : 'w-0'}`}>{text}</span>
+      {alert && <div className={`absolute right-2 h-2 w-2 rounded bg-indigo-400 ${expanded ? '' : 'top-2'}`} />}
 
-        {!expanded && (
-          <div
-            className={`invisible absolute left-full ml-6 -translate-x-3 rounded-md bg-amber-100 px-2 py-1 text-sm text-amber-800 opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}
-          >
-            {text}
-          </div>
-        )}
-      </Link>
-    </li>
+      {/* {!expanded && (
+        <div
+          className={`invisible absolute left-full ml-6 -translate-x-3 rounded-md bg-amber-100 px-2 py-1 text-sm text-amber-800 opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}
+        >
+          {text}
+        </div>
+      )} */}
+    </Link>
   )
 }
 
