@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-white">
+    <div className="flex h-screen w-full overflow-hidden bg-neutral-50">
       <div className="h-full">
         <Sidebar className="h-full">
           <SidebarItem icon={<LayoutDashboard className="h-5 w-5 text-neutral-50" />} text="Dashboard" href="/" />
@@ -16,7 +16,7 @@ export default function DashboardLayout({ children }) {
         </Sidebar>
       </div>
       <div className="flex-1 overflow-auto">
-        <div className="px-16 py-8">{children}</div>
+        <div className="p-8">{children}</div>
       </div>
     </div>
   )
