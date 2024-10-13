@@ -1,13 +1,11 @@
 import openpyxl
 from openpyxl.utils import column_index_from_string
 
-# Ruta de la plantilla existente
 template_path = "offer-template.xlsx"
-output_path = "items_output.xlsx"  # Nombre del archivo de salida
+output_path = "items_output_2.xlsx"  
 
-# Cargar el archivo de plantilla existente
 wb = openpyxl.load_workbook(template_path)
-ws = wb.worksheets[1]  # Seleccionar la hoja activa, o puedes especificar la hoja por su nombre
+ws = wb.worksheets[1] 
 
 # JSON de entrada
 input_json = [
@@ -66,346 +64,9 @@ input_json = [
         "temperature": "25C",
         "service": "Service2",
         "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    },
-    {
-        "item": 2,
-        "valve type": "ball valve",
-        "end_user": "User2",
-        "9COM": "Code2",
-        "size": "Medium",
-        "class": "B",
-        "operation": "Close",
-        "body_construction": "Aluminum",
-        "ball_construction": "Metal",
-        "bore": "20",
-        "ends": "Flanged",
-        "standard": "ANSI",
-        "tag": "Tag2",
-        "model": "Model2",
-        "body": "Body2",
-        "ball": "Ball2",
-        "stem": "Stem2",
-        "seat_housing": "Housing2",
-        "seat": "Seat2",
-        "seals": "Seal2",
-        "injectors": "Injector2",
-        "drain_vent": "Vent2",
-        "painting": "Paint2",
-        "temperature": "25C",
-        "service": "Service2",
-        "available": "No"
-    }
+    }    
 ]
 
-# Mapeo de columnas en Excel
 items_to_excel = {
     "valve type": column_index_from_string("E"),
     "end_user": column_index_from_string("D"),
@@ -434,21 +95,20 @@ items_to_excel = {
     "available": column_index_from_string("AS")
 }
 
-# Insertar los datos en el archivo Excel a partir de la fila B9
-starting_row = 9  # Comienza en la fila 9
+starting_row = 9  
 for index, item in enumerate(input_json, start=0):
-    # Insertar el número de ítem en la columna B (columna 2)
+
     ws.cell(row=starting_row + index, column=2, value=item["item"])
     
-    # Iterar sobre los atributos definidos en items_to_excel
+
     for attribute, col_index in items_to_excel.items():
-        # Obtener el valor del atributo desde input_json
-        value = item.get(attribute, "N/A")  # Si el atributo no existe, asigna "N/A"
+
+        value = item.get(attribute, "N/A")
         
-        # Insertar el valor en la celda correspondiente según el mapeo de items_to_excel
+
         ws.cell(row=starting_row + index, column=col_index, value=value)
 
-# Guardar los cambios en un nuevo archivo de Excel
+
 wb.save(output_path)
 
-print(f"Archivo Excel creado: {output_path}")
+print(f"Arxiu Excel Creat: {output_path}")
