@@ -19,8 +19,21 @@ export default function ExcelValveProcessor() {
 
   const processResults = (data) => {
     return data.map((item) => {
-      // Convertir tamaño a DN y asegurar que sea un entero
-      item.size = convertInchToDN(item.size)
+      // Lógica de temperatura
+      if (item.temperaturaC === 'N/F') {
+        const tempMinC = ((item.temperaturaMinF - 32) * 5) / 9
+        const tempMaxC = ((item.temperaturaMaxF - 32) * 5) / 9
+        item.temperatura = `${tempMinC.toFixed(2)} ºC / ${tempMaxC.toFixed(2)} ºC`
+        item.temperaturaMinC = tempMinC
+        item.temperaturaMaxC = tempMaxC
+      }
+
+      // Lógica de pintura
+      if (item.body.includes('CS') || item.body.includes('A105') || item.body.includes('WC')) {
+        item.painting = 'CS VALVES PAINTED ACC. PROJECT SPECS'
+      } else {
+        item.painting = 'NOT PAINTED'
+      }
 
       // Lógica BALL CONSTRUCTION
       if (item.size > 75 && item.ballConstruction === 'floating') {
@@ -64,10 +77,10 @@ export default function ExcelValveProcessor() {
       }
 
       if (item.seat === 'metal' || item.seat === 'stellite-6') {
-        if (item.temperaturaMaximaC > 200) {
+        if (item.temperaturaMaxC > 200) {
           item.seat = `${item.ball} + Chromium Carbide Coating`
           item.seals = 'GRAPHITE'
-        } else if (item.temperaturaMaximaC < 200) {
+        } else if (item.temperaturaMaxC < 200) {
           item.seat = `${item.ball} + Tungsten Carbide Coating`
           item.seatHousing = 'N/A'
           item.ball = item.seat
