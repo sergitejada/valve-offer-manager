@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react'
 import * as XLSX from 'xlsx'
-import { processValveDescriptions } from '@modules/offers/actions'
 import { Input } from '@modules/commons/ui/input'
 import { Button } from '@modules/commons/ui/button'
+import { processDescriptionsToRfq, processRfqToJson } from '@modules/offers/actions'
 
 export default function ExcelValveProcessor() {
   const [file, setFile] = useState(null)
@@ -56,6 +56,25 @@ export default function ExcelValveProcessor() {
       // Convertir tamaño a DN y asegurar que sea un entero
       item.size = convertInchToDN(item.size)
 
+      // Aplicar la lógica 9COM
+      if (item.end_user !== 'ARAMCO') {
+        item['9COM'] = 'N/A'
+      } else {
+        if (item.construction === 'trunnion') {
+          if (item.seat !== 'metal') {
+            item['9COM'] = 6000000250
+          } else {
+            item.available = false
+          }
+        } else {
+          if (item.size < 50) {
+            item['9COM'] = 6000000240
+          } else {
+            item['9COM'] = 6000000239
+          }
+        }
+      }
+
       return item
     })
   }
@@ -70,39 +89,118 @@ export default function ExcelValveProcessor() {
     setError(null)
     setResults([])
 
-    const reader = new FileReader()
-    reader.onload = async (e) => {
-      try {
-        const data = new Uint8Array(e.target.result)
-        const workbook = XLSX.read(data, { type: 'array' })
-        const sheetName = workbook.SheetNames[0]
-        const worksheet = workbook.Sheets[sheetName]
+    try {
+      // Read the uploaded file
+      const uploadedData = await readUploadedFile(file)
 
-        // Convertir la hoja a un array de arrays
-        const aoa = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: '' })
+      // Process the descriptions
+      const processedResults = await processDescriptions(uploadedData)
 
-        // Filtrar filas vacías y extraer las descripciones
-        const descriptions = aoa.filter((row) => row.length > 0 && row[0].trim() !== '').map((row) => row[0])
+      // Generate Excel file from processed results
+      generateExcelFile(processedResults)
 
-        console.log('Descripciones encontradas:', descriptions)
-
-        const processedResults = []
-        for (const description of descriptions) {
-          const resultRfq = await processDescriptionsToRfq(description)
-          const result = await processRfqToJson(resultRfq)
-          processedResults.push(result)
-        }
-
-        const finalResults = processResults(processedResults)
-        setResults(finalResults)
-      } catch (err) {
-        setError('Error al procesar el archivo: ' + err.message)
-        console.error(err)
-      } finally {
-        setIsLoading(false)
-      }
+      setResults(processedResults)
+    } catch (err) {
+      setError('Error al procesar el archivo: ' + err.message)
+      console.error(err)
+    } finally {
+      setIsLoading(false)
     }
-    reader.readAsArrayBuffer(file)
+  }
+
+  const readUploadedFile = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        try {
+          const data = new Uint8Array(e.target.result)
+          const workbook = XLSX.read(data, { type: 'array' })
+          const sheetName = workbook.SheetNames[0]
+          const worksheet = workbook.Sheets[sheetName]
+          const aoa = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: '' })
+
+          // Find the headers row (row with "DESCRIPTION" in it)
+          const headersRow = aoa.findIndex((row) => row.includes('DESCRIPTION'))
+          if (headersRow === -1) throw new Error('Headers row not found')
+
+          // Extract descriptions from the "DESCRIPTION" column
+          const descriptionColumnIndex = aoa[headersRow].indexOf('DESCRIPTION')
+          if (descriptionColumnIndex === -1) throw new Error('DESCRIPTION column not found')
+
+          const descriptions = aoa
+            .slice(headersRow + 1)
+            .map((row) => row[descriptionColumnIndex])
+            .filter((desc) => desc && desc.trim() !== '')
+
+          resolve(descriptions)
+        } catch (err) {
+          reject(err)
+        }
+      }
+      reader.onerror = (err) => reject(err)
+      reader.readAsArrayBuffer(file)
+    })
+  }
+
+  const processDescriptions = async (descriptions) => {
+    const processedResults = []
+    for (const description of descriptions) {
+      const resultRfq = await processDescriptionsToRfq(description)
+      const result = await processRfqToJson(resultRfq)
+      processedResults.push(result)
+    }
+    return processResults(processedResults)
+  }
+
+  const generateExcelFile = (processedResults) => {
+    // Define the headers
+    const headers = [
+      'ITEM',
+      'DESCRIPTION',
+      'SIZE',
+      'CLASS',
+      'OPERATION',
+      'BODY CONSTRUCTION',
+      'BALL CONSTRUCTION',
+      'VALVE ENDS',
+      'DESIGN',
+      'TAG',
+      'BODY',
+      'BALL',
+      'STEM',
+      'SERVICE',
+    ]
+
+    // Create the worksheet data
+    const wsData = [
+      headers,
+      ...processedResults.map((item, index) => [
+        index + 1,
+        item['valve type'],
+        item.size,
+        item.class,
+        item.operation,
+        item.construction,
+        item.bore,
+        item.ends,
+        item.standard,
+        item.tag,
+        item.body,
+        item.ball,
+        item.stem,
+        item.service,
+      ]),
+    ]
+
+    // Create a new workbook and add the worksheet
+    const wb = XLSX.utils.book_new()
+    const ws = XLSX.utils.aoa_to_sheet(wsData)
+
+    // Add the worksheet to the workbook
+    XLSX.utils.book_append_sheet(wb, ws, 'Processed Valves')
+
+    // Generate Excel file
+    XLSX.writeFile(wb, 'processed_valve_data.xlsx')
   }
 
   return (
