@@ -54,7 +54,8 @@ export default function ExcelValveProcessor() {
   const processResults = (data) => {
     return data.map((item) => {
       // Convertir tamaño a DN y asegurar que sea un entero
-      item.size = convertInchToDN(item.size)
+      // console.log(item.size)
+      // item.size = convertInchToDN(item.size)
 
       // Aplicar la lógica 9COM
       if (item.end_user !== 'ARAMCO') {
