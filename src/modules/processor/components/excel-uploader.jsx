@@ -152,7 +152,17 @@ export default function ExcelValveProcessor() {
       const processedResults = await processDescriptions(uploadedData)
 
       // Generate Excel file from processed results
-      generateExcelFile(processedResults)
+      // Generate Excel file from processed results
+      const excelBlob = generateExcelFile(processedResults)
+
+      // Create a download link
+      const url = window.URL.createObjectURL(excelBlob)
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', 'processed_valve_data.xlsx')
+      document.body.appendChild(link)
+      link.click()
+      link.parentNode.removeChild(link)
 
       setResults(processedResults)
     } catch (err) {
@@ -207,55 +217,66 @@ export default function ExcelValveProcessor() {
     return processResults(processedResults)
   }
 
-  const generateExcelFile = (processedResults) => {
-    // Define the headers
-    const headers = [
-      'ITEM',
-      'DESCRIPTION',
-      'SIZE',
-      'CLASS',
-      'OPERATION',
-      'BODY CONSTRUCTION',
-      'BALL CONSTRUCTION',
-      'VALVE ENDS',
-      'DESIGN',
-      'TAG',
-      'BODY',
-      'BALL',
-      'STEM',
-      'SERVICE',
-    ]
+  const generateExcelFile = (data) => {
+    const items_to_excel = {
+      'valve type': 5,
+      end_user: 4,
+      '9COM': 10,
+      size: 11,
+      class: 12,
+      operation: 6,
+      body_construction: 13,
+      construction: 14,
+      bore: 15,
+      ends: 16,
+      standard: 17,
+      tag: 7,
+      model: 18,
+      body: 19,
+      ball: 20,
+      stem: 21,
+      seat_housing: 22,
+      seat: 23,
+      seals: 24,
+      injectors: 25,
+      drain_vent: 26,
+      painting: 27,
+      temperature: 28,
+      service: 29,
+      available: 45,
+    }
 
-    // Create the worksheet data
-    const wsData = [
-      headers,
-      ...processedResults.map((item, index) => [
-        index + 1,
-        item['valve type'],
-        item.size,
-        item.class,
-        item.operation,
-        item.construction,
-        item.bore,
-        item.ends,
-        item.standard,
-        item.tag,
-        item.body,
-        item.ball,
-        item.stem,
-        item.service,
-      ]),
-    ]
-
-    // Create a new workbook and add the worksheet
+    // Create a new workbook and worksheet
     const wb = XLSX.utils.book_new()
-    const ws = XLSX.utils.aoa_to_sheet(wsData)
+    const ws = XLSX.utils.json_to_sheet([])
+
+    // Add headers
+    const headers = Object.keys(items_to_excel)
+    XLSX.utils.sheet_add_aoa(ws, [headers], { origin: 'A1' })
+
+    // Add data
+    const excelData = data.map((item) =>
+      headers.map((header) => {
+        if (header === '9COM') {
+          return item['9COM']
+        }
+        return item[header.toLowerCase().replace(/_/g, '')] || ''
+      })
+    )
+    XLSX.utils.sheet_add_aoa(ws, excelData, { origin: 'A2' })
+
+    // Set column widths
+    const colWidths = headers.map(() => ({ wch: 15 }))
+    ws['!cols'] = colWidths
 
     // Add the worksheet to the workbook
-    XLSX.utils.book_append_sheet(wb, ws, 'Processed Valves')
+    XLSX.utils.book_append_sheet(wb, ws, 'Valve Data')
 
     // Generate Excel file
-    XLSX.writeFile(wb, 'processed_valve_data.xlsx')
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' })
+    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+
+    return blob
   }
 
   return (
