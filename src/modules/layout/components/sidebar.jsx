@@ -4,8 +4,6 @@ import Separator from '@modules/commons/components/separator'
 import { Button } from '@modules/commons/ui/button'
 import { ArrowLeftToLine, ArrowRightFromLine, Search } from 'lucide-react'
 import Image from 'next/image'
-// import ChevronLeft from '@modules/commons/icons/chevron-left'
-// import ChevronRight from '@modules/commons/icons/chevron-right'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import PropTypes from 'prop-types'
@@ -99,14 +97,6 @@ export function SidebarItem({ icon, text, alert, href }) {
       {icon}
       <span className={`overflow-hidden text-sm font-medium ${expanded ? 'ml-3 w-52' : 'w-0'}`}>{text}</span>
       {alert && <div className={`absolute right-2 h-2 w-2 rounded bg-indigo-400 ${expanded ? '' : 'top-2'}`} />}
-
-      {/* {!expanded && (
-        <div
-          className={`invisible absolute left-full ml-6 -translate-x-3 rounded-md bg-amber-100 px-2 py-1 text-sm text-amber-800 opacity-20 transition-all group-hover:visible group-hover:translate-x-0 group-hover:opacity-100`}
-        >
-          {text}
-        </div>
-      )} */}
     </Link>
   )
 }

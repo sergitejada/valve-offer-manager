@@ -18,11 +18,13 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.438.0",
     "next": "14.2.7",
+    "openai": "^4.67.3",
     "prop-types": "^15.8.1",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
