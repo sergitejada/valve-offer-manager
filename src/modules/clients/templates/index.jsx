@@ -8,16 +8,16 @@ import { Plus, Users } from 'lucide-react'
 const clients = [
   {
     id: 1,
-    name: 'ACME Inc.',
+    name: 'Aramco',
     contact: [
       {
         name: 'John Doe',
-        email: 'john@acme.com',
+        email: 'john@aramco.com',
         phone: '123456789',
       },
       {
         name: 'Jane Doe',
-        email: 'jane@acme.com',
+        email: 'jane@aramco.com',
         phone: '987654321',
       },
     ],
@@ -27,11 +27,11 @@ const clients = [
   },
   {
     id: 2,
-    name: 'TechCorp',
+    name: 'IVM',
     contact: [
       {
         name: 'Alice Johnson',
-        email: 'alice@techcorp.com',
+        email: 'alice@IVM.com',
         phone: '555123456',
       },
     ],
@@ -41,16 +41,16 @@ const clients = [
   },
   {
     id: 3,
-    name: 'Global Solutions',
+    name: 'UBSCO',
     contact: [
       {
         name: 'Bob Smith',
-        email: 'bob@globalsolutions.com',
+        email: 'bob@ubsco.com',
         phone: '444555666',
       },
       {
         name: 'Carol White',
-        email: 'carol@globalsolutions.com',
+        email: 'carol@ubsco.com',
         phone: '777888999',
       },
     ],
@@ -60,11 +60,11 @@ const clients = [
   },
   {
     id: 4,
-    name: 'Innovate Co.',
+    name: 'Lamprell',
     contact: [
       {
         name: 'David Brown',
-        email: 'david@innovateco.com',
+        email: 'david@Lamprell.com',
         phone: '111222333',
       },
     ],
@@ -74,11 +74,11 @@ const clients = [
   },
   {
     id: 5,
-    name: 'EcoFriendly Ltd.',
+    name: 'VCF',
     contact: [
       {
         name: 'Emma Green',
-        email: 'emma@ecofriendly.com',
+        email: 'emma@VCF.com',
         phone: '999000111',
       },
     ],
@@ -88,16 +88,16 @@ const clients = [
   },
   {
     id: 6,
-    name: 'MegaCorp',
+    name: 'Measurement+',
     contact: [
       {
         name: 'Frank Wilson',
-        email: 'frank@megacorp.com',
+        email: 'frank@measurementplus.com',
         phone: '222333444',
       },
       {
         name: 'Grace Lee',
-        email: 'grace@megacorp.com',
+        email: 'grace@measurementplus.com',
         phone: '555666777',
       },
     ],
@@ -107,11 +107,11 @@ const clients = [
   },
   {
     id: 7,
-    name: 'SmartSystems',
+    name: 'Petronash',
     contact: [
       {
         name: 'Henry Taylor',
-        email: 'henry@smartsystems.com',
+        email: 'henry@petronash.com',
         phone: '888999000',
       },
     ],
@@ -121,11 +121,11 @@ const clients = [
   },
   {
     id: 8,
-    name: 'FutureTech',
+    name: 'Petrotech',
     contact: [
       {
         name: 'Ivy Chen',
-        email: 'ivy@futuretech.com',
+        email: 'ivy@petrotech.com',
         phone: '333444555',
       },
     ],
@@ -135,16 +135,16 @@ const clients = [
   },
   {
     id: 9,
-    name: 'GreenEnergy',
+    name: 'Saudi Fal',
     contact: [
       {
         name: 'Jack Black',
-        email: 'jack@greenenergy.com',
+        email: 'jack@saudifal.com',
         phone: '666777888',
       },
       {
         name: 'Kelly White',
-        email: 'kelly@greenenergy.com',
+        email: 'kelly@saudifal.com',
         phone: '111000999',
       },
     ],
@@ -154,11 +154,11 @@ const clients = [
   },
   {
     id: 10,
-    name: 'DataDynamics',
+    name: 'Ras Al-Hamra',
     contact: [
       {
         name: "Liam O'Connor",
-        email: 'liam@datadynamics.com',
+        email: 'liam@rasalhamra.com',
         phone: '777666555',
       },
     ],
@@ -168,11 +168,11 @@ const clients = [
   },
   {
     id: 11,
-    name: 'CloudNine',
+    name: 'Veolia',
     contact: [
       {
         name: 'Mia Rodriguez',
-        email: 'mia@cloudnine.com',
+        email: 'mia@veolia.com',
         phone: '444333222',
       },
     ],
@@ -182,16 +182,16 @@ const clients = [
   },
   {
     id: 12,
-    name: 'Quantum Ltd.',
+    name: 'Inoxcva',
     contact: [
       {
         name: 'Nathan Kim',
-        email: 'nathan@quantumltd.com',
+        email: 'nathan@inoxcva.com',
         phone: '999888777',
       },
       {
         name: 'Olivia Park',
-        email: 'olivia@quantumltd.com',
+        email: 'olivia@inoxcva.com',
         phone: '222111000',
       },
     ],
@@ -201,11 +201,11 @@ const clients = [
   },
   {
     id: 13,
-    name: 'AI Solutions',
+    name: 'AVA',
     contact: [
       {
         name: 'Peter Wang',
-        email: 'peter@aisolutions.com',
+        email: 'peter@ava.com',
         phone: '555444333',
       },
     ],
@@ -215,11 +215,11 @@ const clients = [
   },
   {
     id: 14,
-    name: 'RoboTech',
+    name: 'NPCC',
     contact: [
       {
         name: 'Quinn Foster',
-        email: 'quinn@robotech.com',
+        email: 'quinn@npcc.com',
         phone: '888777666',
       },
     ],
@@ -229,16 +229,16 @@ const clients = [
   },
   {
     id: 15,
-    name: 'SecureNet',
+    name: 'Global Trade Solutions',
     contact: [
       {
         name: 'Rachel Adams',
-        email: 'rachel@securenet.com',
+        email: 'rachel@globaltradesolutions.com',
         phone: '333222111',
       },
       {
         name: 'Sam Thompson',
-        email: 'sam@securenet.com',
+        email: 'sam@globaltradesolutions.com',
         phone: '666555444',
       },
     ],
@@ -248,11 +248,11 @@ const clients = [
   },
   {
     id: 16,
-    name: 'BioTech Inc.',
+    name: 'Petrorabigh',
     contact: [
       {
         name: 'Tina Chen',
-        email: 'tina@biotechinc.com',
+        email: 'tina@petrorabigh.com',
         phone: '777888999',
       },
     ],
@@ -262,11 +262,11 @@ const clients = [
   },
   {
     id: 17,
-    name: 'VR Dynamics',
+    name: 'Shell',
     contact: [
       {
         name: 'Ulysses Grant',
-        email: 'ulysses@vrdynamics.com',
+        email: 'ulysses@shell.com',
         phone: '111222333',
       },
     ],
@@ -276,16 +276,16 @@ const clients = [
   },
   {
     id: 18,
-    name: 'WebWizards',
+    name: 'MRC Global',
     contact: [
       {
         name: 'Victoria Lee',
-        email: 'victoria@webwizards.com',
+        email: 'victoria@mrc.com',
         phone: '444555666',
       },
       {
         name: 'William Choi',
-        email: 'william@webwizards.com',
+        email: 'william@mrc.com',
         phone: '999000111',
       },
     ],
@@ -295,11 +295,11 @@ const clients = [
   },
   {
     id: 19,
-    name: 'Nano Systems',
+    name: 'Hiunday',
     contact: [
       {
         name: 'Xander Jones',
-        email: 'xander@nanosystems.com',
+        email: 'xander@hiunday.com',
         phone: '555666777',
       },
     ],
@@ -309,11 +309,11 @@ const clients = [
   },
   {
     id: 20,
-    name: 'EcoSmart',
+    name: 'Total Energy',
     contact: [
       {
         name: 'Yara Ali',
-        email: 'yara@ecosmart.com',
+        email: 'yara@totalenergy.com',
         phone: '888999000',
       },
     ],

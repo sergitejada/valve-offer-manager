@@ -281,11 +281,11 @@ export default function ExcelValveProcessor() {
 
   return (
     <div className="mx-auto max-w-4xl p-4">
-      <h1 className="mb-4 text-2xl font-bold">Procesador de Descripciones de Válvulas</h1>
+      <h1 className="mb-4 text-2xl font-bold">Processador de Descripcions de Vàlvules</h1>
       <div className="mb-4">
         <Input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} className="mb-2" />
         <Button onClick={processFile} disabled={isLoading || !file} className="w-full">
-          {isLoading ? 'Procesando...' : 'Procesar Archivo'}
+          {isLoading ? 'Processant...' : 'Processar Arxiu'}
         </Button>
       </div>
 
@@ -293,7 +293,7 @@ export default function ExcelValveProcessor() {
 
       {results.length > 0 && (
         <div className="mt-4">
-          <h2 className="mb-2 text-xl font-semibold">Resultados:</h2>
+          <h2 className="mb-2 text-xl font-semibold">Resultats:</h2>
           {results.map((result, index) => (
             <div key={index} className="mb-4 rounded bg-gray-100 p-4">
               <h3 className="font-semibold">Ítem {index + 1}</h3>
