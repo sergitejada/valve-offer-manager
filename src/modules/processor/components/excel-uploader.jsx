@@ -19,6 +19,9 @@ export default function ExcelValveProcessor() {
 
   const processResults = (data) => {
     return data.map((item) => {
+      // Convertir tamaño a DN y asegurar que sea un entero
+      item.size = convertInchToDN(item.size)
+
       // Lógica BALL CONSTRUCTION
       if (item.size > 75 && item.ballConstruction === 'floating') {
         item.ballConstruction = 'trunnion'
@@ -47,6 +50,52 @@ export default function ExcelValveProcessor() {
         } else if (item.class < 600) {
           item.model = 'FB'
         }
+      }
+
+      // Lógica SEAT
+      if (item.class < 600) {
+        if (item.seat === 'N/F' || item.seat === 'PTFE' || item.seat === 'RPTFE') {
+          item.seat = 'PTFE MOD + RCAR'
+        }
+      } else {
+        if (item.seat === 'N/F' || item.seat === 'PTFE' || item.seat === 'RPTFE') {
+          item.seat = 'PEEK'
+        }
+      }
+
+      if (item.seat === 'metal' || item.seat === 'stellite-6') {
+        if (item.temperaturaMaximaC > 200) {
+          item.seat = `${item.ball} + Chromium Carbide Coating`
+          item.seals = 'GRAPHITE'
+        } else if (item.temperaturaMaximaC < 200) {
+          item.seat = `${item.ball} + Tungsten Carbide Coating`
+          item.seatHousing = 'N/A'
+          item.ball = item.seat
+        }
+      }
+
+      // Lógica TRIM
+      if (item.ball === 'N/F') {
+        item.ball = 'SS316'
+      }
+      if (item.stem === 'N/F') {
+        item.stem = item.ball
+      }
+
+      // Lógica SEAT HOUSING
+      item.seatHousing = item.ballConstruction === 'trunnion' ? item.ball : 'N/A'
+
+      // Lógica STANDARD
+      if (item.design === 'N/F') {
+        item.design = item.ballConstruction === 'floating' ? 'ISO 17292' : 'API 6D'
+      }
+
+      // Lógica CLASS
+      item.class = `${item.class}#`
+
+      // Lógica INJECTORS
+      if (item.size > 150) {
+        item.injectors = 'SEAT & STEM INJECTORS'
       }
 
       // Lógica 9COM
