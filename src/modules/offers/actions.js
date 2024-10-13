@@ -10,7 +10,7 @@ export async function processDescriptionsToRfq(descriptions) {
   console.log(descriptions)
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-3.5-turbo',
       messages: [
         {
           role: 'system',
@@ -228,7 +228,7 @@ export async function processRfqToJson(descriptions) {
   console.log(descriptions)
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-3.5-turbo',
       messages: [
         {
           role: 'system',

@@ -17,51 +17,43 @@ export default function ExcelValveProcessor() {
     setFile(file)
   }
 
-  const convertInchToDN = (size) => {
-    // Eliminar cualquier espacio y convertir a minúsculas
-    size = size.toString().trim().toLowerCase()
-
-    // Verificar si el tamaño ya está en DN
-    if (size.endsWith('dn') || size.endsWith('nps')) {
-      return parseInt(size)
-    }
-
-    // Eliminar cualquier unidad ('in', '"', 'inch', 'inches')
-    size = size.replace(/(in|"|inch|inches)$/, '').trim()
-
-    // Convertir fracciones a decimales si es necesario
-    if (size.includes('/')) {
-      const [num, den] = size.split('/').map(Number)
-      size = (num / den).toFixed(2)
-    }
-
-    // Convertir a número
-    const sizeNum = parseFloat(size)
-
-    // Aplicar la conversión basada en rangos
-    if (sizeNum <= 0.5) return 15
-    if (sizeNum <= 0.75) return 20
-    if (sizeNum <= 1) return 25
-    if (sizeNum <= 2) return 50
-    if (sizeNum <= 3) return 80
-    if (sizeNum <= 4) return 100
-    if (sizeNum <= 6) return 150
-
-    // Para tamaños > 6 pulgadas, usar la fórmula general
-    return Math.round(sizeNum * 25)
-  }
-
   const processResults = (data) => {
     return data.map((item) => {
-      // Convertir tamaño a DN y asegurar que sea un entero
-      // console.log(item.size)
-      // item.size = convertInchToDN(item.size)
+      // Lógica BALL CONSTRUCTION
+      if (item.size > 75 && item.ballConstruction === 'floating') {
+        item.ballConstruction = 'trunnion'
+      }
 
-      // Aplicar la lógica 9COM
+      // Lógica MODEL
+      if (item.ballConstruction === 'trunnion') {
+        if (item.size < 150) {
+          item.model = 'APT'
+        } else if (item.size > 150) {
+          item.model = 'TSB'
+        } else if (item.size === 150) {
+          if (item.bore === 'RB' || item.bore === 'FB') {
+            item.model = 'APT'
+          }
+        }
+      } else if (item.ballConstruction === 'floating') {
+        if (item.ends === 'SW') {
+          if (item.class === 300) {
+            item.model = 'SR8'
+          } else if (item.class > 800) {
+            item.model = item.end_user === 'ARAMCO' ? 'Q3' : 'SR8'
+          } else if (item.class > 300) {
+            item.model = 'AP'
+          }
+        } else if (item.class < 600) {
+          item.model = 'FB'
+        }
+      }
+
+      // Lógica 9COM
       if (item.end_user !== 'ARAMCO') {
         item['9COM'] = 'N/A'
       } else {
-        if (item.construction === 'trunnion') {
+        if (item.ballConstruction === 'trunnion') {
           if (item.seat !== 'metal') {
             item['9COM'] = 6000000250
           } else {
